@@ -22,7 +22,7 @@
           </label>
         </div>
         <div class="flex-1 px-2 mx-2">
-          <h1 class="text-lg font-bold text-primary">edgeKey</h1>
+          <h1 class="text-lg font-bold text-primary">momokey</h1>
         </div>
       </div>
 
@@ -113,7 +113,7 @@
         <div class="p-4 border-t border-base-300 mt-auto space-y-2">
           <AppButton variant="outline" block @click="handleSignOut">退出登录</AppButton>
           <div class="flex items-center justify-between text-xs text-base-content/50 px-2">
-            <a class="cursor-default" target="_blank" href="https://github.com/34892002/edgeKey">edgeKey</a>
+            <a class="cursor-default" target="_blank" href="https://github.com/justsoman/momokey">momokey</a>
             <div class="">
               <button class="hover:text-primary transition-colors mr-2" @click="checkUpdate" :title="updateTip" >
                 v{{ appVersion }}-{{ gitHash }}
@@ -159,7 +159,7 @@ async function checkUpdate() {
   statusColor.value = 'status-warning';
   updateTip.value = '检查中...';
   try {
-    const pkgRes = await fetch('https://raw.githubusercontent.com/34892002/edgeKey/main/package.json');
+    const pkgRes = await fetch('https://raw.githubusercontent.com/justsoman/momokey/main/package.json');
     const pkg = await pkgRes.json() as { version?: string };
     if (!pkg.version) throw new Error('invalid response');
     
