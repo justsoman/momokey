@@ -1,9 +1,9 @@
 [![English](https://img.shields.io/badge/English-Click-yellow)](README-en.md)
 [![中文文档](https://img.shields.io/badge/中文文档-点击查看-orange)](README.md)
 
-# EdgeKey
+# momokey
 
-EdgeKey 是一套有vike框架开发，可直接部署到 Cloudflare 的一体化全栈卡密商城系统：同一套代码同时包含前端页面、SSR 渲染、后端 API / 数据变更入口，并由 Cloudflare Workers 运行。
+momokey 是一套有vike框架开发，可直接部署到 Cloudflare 的一体化全栈卡密商城系统：同一套代码同时包含前端页面、SSR 渲染、后端 API / 数据变更入口，并由 Cloudflare Workers 运行。
 
 ## 功能特性
 
@@ -46,14 +46,14 @@ EdgeKey 是一套有vike框架开发，可直接部署到 Cloudflare 的一体�
 
 ### 一键部署到 Cloudflare Workers
 
-[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/34892002/edgeKey)
+[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/justsoman/momokey)
 
 > **点击按钮后，会打开 Cloudflare Workers 部署向导，操作提示：**
 > 1. 登录并授权 Git 账户(github、gitlab)，它会自动在你的git账号创建一个新仓库。
 > 2. 为了增强安全性，请在向导中修改默认的密钥（ `AUTH_SECRET`）。
 > 3. 如果你不绑定已有的D1数据库，它会自动完成新建数据库并初始化数据（管理员账号等）的操作，无需手动干预。
-> 4. 部署成功之后在页面的日志里面可以找到 "Deployed edgekey triggers (0.38 sec) https://edgekey.你的账号.workers.dev" 这样的日志，其中 "https://edgekey.你的账号.workers.dev" 就是你的项目网址。
-> 5. https://edgekey.你的账号.workers.dev/admin 为管理后台登陆地址，默认管理员账号:admin，密码:admin123456，切记登陆后立即修改密码！
+> 4. 部署成功之后在页面的日志里面可以找到 "Deployed momokey triggers (0.38 sec) https://momokey.你的账号.workers.dev" 这样的日志，其中 "https://momokey.你的账号.workers.dev" 就是你的项目网址。
+> 5. https://momokey.你的账号.workers.dev/admin 为管理后台登陆地址，默认管理员账号:admin，密码:admin123456，切记登陆后立即修改密码！
 
 **一键部署常见问题** 
 
@@ -65,7 +65,7 @@ EdgeKey 是一套有vike框架开发，可直接部署到 Cloudflare 的一体�
 
 a.首次更新
 ```base
-git remote add upstream https://github.com/34892002/edgeKey.git
+git remote add upstream https://github.com/justsoman/momokey.git
 git fetch upstream
 git merge upstream/main --allow-unrelated-histories
 git push origin main
@@ -379,7 +379,7 @@ function handle(data: SomeType) { ... }
 > 实时线上环境日志: bunx wrangler tail --format pretty
 
 1. 进入 [dash.cloudflare.com](https://dash.cloudflare.com)
-2. 左侧菜单 → **Workers & Pages** → 点击 **edgekey**
+2. 左侧菜单 → **Workers & Pages** → 点击 **momokey**
 3. 顶部 tab → **Observability**
 4. 在搜索框输入关键词过滤日志，例如：
    - `email.notify_order_paid.config_failed` — 支付后邮件配置获取失败
@@ -400,5 +400,5 @@ function handle(data: SomeType) { ... }
 
 
 ## 🏝️ 社区交流
-- Telegram 群组：https://t.me/edgeKeyChannel
-- Telegram 频道：https://t.me/edgeKeyGroup
+- Telegram 群组：https://t.me/momokeyChannel
+- Telegram 频道：https://t.me/momokeyGroup

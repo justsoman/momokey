@@ -1,9 +1,9 @@
 [![English](https://img.shields.io/badge/English-Click-yellow)](README-en.md)
 [![中文文档](https://img.shields.io/badge/中文文档-点击查看-orange)](README.md)
 
-# EdgeKey
+# momokey
 
-EdgeKey is a full-stack card key shop system built with the Vike framework, deployable directly to Cloudflare. The same codebase includes frontend pages, SSR rendering, and backend API endpoints, all running on Cloudflare Workers.
+momokey is a full-stack card key shop system built with the Vike framework, deployable directly to Cloudflare. The same codebase includes frontend pages, SSR rendering, and backend API endpoints, all running on Cloudflare Workers.
 
 ## Features
 
@@ -40,14 +40,14 @@ Three deployment methods are supported, ordered by recommendation:
 
 ### One-Click Deploy to Cloudflare Workers
 
-[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/34892002/edgeKey)
+[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/justsoman/momokey)
 
 > **After clicking the button, the Cloudflare Workers deployment wizard will open:**
 > 1. Log in and authorize your Git account (GitHub/GitLab). It will automatically create a new repository under your account.
 > 2. For security, change the default secret (`AUTH_SECRET`) in the wizard.
 > 3. If you don't bind an existing D1 database, it will automatically create and initialize one (including admin account), no manual steps needed.
-> 4. After deployment, find a log entry like `Deployed edgekey triggers (0.38 sec) https://edgekey.youraccount.workers.dev` — that URL is your site.
-> 5. `https://edgekey.youraccount.workers.dev/admin` is the admin login page. Default credentials: `admin` / `admin123456`. **Change your password immediately after first login!**
+> 4. After deployment, find a log entry like `Deployed momokey triggers (0.38 sec) https://momokey.youraccount.workers.dev` — that URL is your site.
+> 5. `https://momokey.youraccount.workers.dev/admin` is the admin login page. Default credentials: `admin` / `admin123456`. **Change your password immediately after first login!**
 
 ### Git-Connected Cloudflare Auto Deploy
 
@@ -65,7 +65,7 @@ Table schema and seed data are initialized automatically by the `deploy` script 
 
 Since `wrangler.jsonc` requires your actual D1 `database_id`, set the build command in Cloudflare's "Build Configuration" to:
 
-```D:\code\edgeKey\README-en.md#L1-1
+```bash
 sed -i 's/"database_name": "edgekey-db"/"database_name": "edgekey-db", "database_id": "YOUR_DATABASE_ID"/' wrangler.jsonc && bun run deploy
 ```
 
@@ -84,7 +84,7 @@ Before deploying to Cloudflare for the first time, create and initialize the D1 
 
 **1. Login and create the database**
 
-```D:\code\edgeKey\README-en.md#L1-1
+```bash
 bunx wrangler login
 bunx wrangler d1 create edgekey-db
 ```
@@ -93,7 +93,7 @@ bunx wrangler d1 create edgekey-db
 
 Copy the `database_id` from the terminal output into `wrangler.jsonc`:
 
-```D:\code\edgeKey\README-en.md#L1-1
+```jsonc
 "d1_databases": [
   {
     "binding": "DB",
@@ -106,25 +106,25 @@ Copy the `database_id` from the terminal output into `wrangler.jsonc`:
 
 **3. Initialize remote table schema**
 
-```D:\code\edgeKey\README-en.md#L1-1
+```bash
 bun run db:migrations:remote
 ```
 
 **4. Seed admin account and initial data**
 
-```D:\code\edgeKey\README-en.md#L1-1
+```bash
 bun run db:seed:remote
 ```
 
 **5. Configure AUTH_SECRET**
 
-```D:\code\edgeKey\README-en.md#L1-1
+```bash
 bunx wrangler secret put AUTH_SECRET
 ```
 
 **6. Generate Prisma Client and deploy**
 
-```D:\code\edgeKey\README-en.md#L1-1
+```bash
 bun run db:generate
 bun run up
 ```
@@ -159,13 +159,13 @@ UPDATE Admin SET passwordHash = '$2b$10$viMe8RgcpM30gmmF9OpOcuA/QgleSIUk5VRtqjOu
 
 Bun is recommended (npm/pnpm/yarn also work).
 
-```D:\code\edgeKey\README-en.md#L1-1
+```bash
 bun install
 ```
 
 Since this project uses Cloudflare D1, you must initialize the local D1 simulator schema before starting the dev server for the first time:
 
-```D:\code\edgeKey\README-en.md#L1-1
+```bash
 # 1. Generate Prisma Client (required after first install)
 bun run db:generate
 
@@ -197,7 +197,7 @@ When modifying the database schema, follow this process strictly:
 
 **Step 1: Modify schema and generate SQL migration**
 
-```D:\code\edgeKey\README-en.md#L1-1
+```bash
 bunx prisma migrate diff \
   --from-migrations prisma/migrations \
   --to-schema prisma/schema.prisma \
@@ -209,19 +209,19 @@ bunx prisma migrate diff \
 
 **Step 2: Sync to local D1 simulator**
 
-```D:\code\edgeKey\README-en.md#L1-1
+```bash
 bun run db:migrations:local
 ```
 
 **Step 3: Sync to Cloudflare remote (before publishing)**
 
-```D:\code\edgeKey\README-en.md#L1-1
+```bash
 bun run db:migrations:remote
 ```
 
 ### Daily Dev Command
 
-```D:\code\edgeKey\README-en.md#L1-1
+```bash
 bun dev
 ```
 
@@ -245,7 +245,7 @@ bun dev
 
 ## Project Structure
 
-```D:\code\edgeKey\README-en.md#L1-1
+```text
 .
 ├─ assets/                 # Static assets
 ├─ components/             # Reusable components (non-route pages)
@@ -294,7 +294,7 @@ Common `+` files:
 When email or payment callback issues occur, check Workers logs in Cloudflare Dashboard:
 
 1. Go to [dash.cloudflare.com](https://dash.cloudflare.com)
-2. Left menu → **Workers & Pages** → click **edgekey**
+2. Left menu → **Workers & Pages** → click **momokey**
 3. Top tab → **Observability**
 4. Filter logs by keyword, e.g.:
    - `email.notify_order_paid.config_failed` — email config fetch failed after payment
@@ -315,5 +315,5 @@ Thanks to the following open source projects:
 
 
 ## 🏝️ Get Involved
-- Join our Group: https://t.me/edgeKeyChannel
-- Subscribe to Channel: https://t.me/edgeKeyGroup
+- Join our Group: https://t.me/momokeyChannel
+- Subscribe to Channel: https://t.me/momokeyGroup
